@@ -5,9 +5,6 @@ Media pembelajaran interaktif berbasis web untuk memahami **4 Pilar Berpikir Kom
 2. **Dekomposisi (*Decomposition*)**
 3. **Pengenalan Pola (*Pattern Recognition*)**
 4. **Perancangan Algoritma (*Algorithmic Thinking*)**
-
-Dibuat dalam format **single-file standalone (`index.html`)** tanpa dependensi backend atau proses build, siap dijalankan langsung di browser atau di-host melalui **GitHub Pages**.
-
 ---
 
 ## 🚀 Live Demo Website
