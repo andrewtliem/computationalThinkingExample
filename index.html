@@ -1,0 +1,2108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab Berpikir Komputasional (CT Lab)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --primary-light: #eef2ff;
+      --secondary: #0ea5e9;
+      --secondary-light: #e0f2fe;
+      --success: #10b981;
+      --success-light: #ecfdf5;
+      --warning: #f59e0b;
+      --warning-light: #fffbeb;
+      --danger: #ef4444;
+      --dark: #0f172a;
+      --gray-800: #1e293b;
+      --gray-600: #475569;
+      --gray-400: #94a3b8;
+      --gray-200: #e2e8f0;
+      --gray-100: #f8fafc;
+      --white: #ffffff;
+      --card-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+      --card-shadow-lg: 0 20px 30px -10px rgba(15, 23, 42, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f1f5f9;
+      color: var(--dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Header */
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 0.85rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-icon {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+    }
+
+    .brand h1 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--dark);
+      letter-spacing: -0.02em;
+    }
+
+    .brand p {
+      font-size: 0.75rem;
+      color: var(--gray-600);
+    }
+
+    /* Main Topic / Module Switcher */
+    .module-switcher {
+      display: flex;
+      background: #e2e8f0;
+      padding: 4px;
+      border-radius: 12px;
+      gap: 4px;
+    }
+
+    .module-btn {
+      border: none;
+      background: transparent;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--gray-600);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .module-btn:hover {
+      color: var(--dark);
+    }
+
+    .module-btn.active {
+      background: var(--white);
+      color: var(--primary);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    /* 4 Pillars Navigation Tabs */
+    .nav-tabs-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .nav-tabs {
+      display: inline-flex;
+      background: var(--white);
+      padding: 5px;
+      border-radius: 14px;
+      gap: 6px;
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--card-shadow);
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      border: none;
+      background: transparent;
+      padding: 0.55rem 1.1rem;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gray-600);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .tab-btn:hover {
+      color: var(--dark);
+      background: var(--gray-100);
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: var(--white);
+      box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25);
+    }
+
+    .tab-badge {
+      font-size: 0.7rem;
+      background: rgba(0,0,0,0.08);
+      padding: 2px 6px;
+      border-radius: 999px;
+    }
+
+    .tab-btn.active .tab-badge {
+      background: rgba(255,255,255,0.25);
+      color: white;
+    }
+
+    /* Main Workspace */
+    main {
+      max-width: 1200px;
+      width: 100%;
+      margin: 1rem auto;
+      padding: 0 1.25rem 3rem 1.25rem;
+      flex: 1;
+    }
+
+    /* Mission Box */
+    .mission-card {
+      background: linear-gradient(135deg, #1e1b4b, #312e81);
+      color: var(--white);
+      border-radius: 18px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      box-shadow: var(--card-shadow);
+      flex-wrap: wrap;
+    }
+
+    .mission-card.library-theme {
+      background: linear-gradient(135deg, #064e3b, #047857);
+    }
+
+    .mission-text h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mission-text p {
+      font-size: 0.88rem;
+      color: #c7d2fe;
+      line-height: 1.5;
+    }
+
+    .library-theme .mission-text p {
+      color: #a7f3d0;
+    }
+
+    .pill-tag {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #ffffff;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Module Views */
+    .module-view {
+      display: none;
+    }
+
+    .module-view.active {
+      display: block;
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    /* Stage Container */
+    .stage-section {
+      display: none;
+    }
+
+    .stage-section.active {
+      display: block;
+      animation: fadeIn 0.25s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Arena & Visualizer Cards */
+    .visualizer-card {
+      background: var(--white);
+      border-radius: 20px;
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--card-shadow);
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .arena-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .arena-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .arena-controls {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--gray-100);
+      color: var(--gray-800);
+      border: 1px solid var(--gray-200);
+    }
+    .btn-secondary:hover {
+      background: var(--gray-200);
+    }
+
+    .btn-emerald {
+      background: #059669;
+      color: white;
+    }
+    .btn-emerald:hover {
+      background: #047857;
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: white;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    /* ================= LINEUP: MODULE 1 (PEOPLE SORT) ================= */
+    .people-lineup {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 1.25rem;
+      min-height: 290px;
+      padding: 2rem 1rem 1rem 1rem;
+      background: linear-gradient(to bottom, #f8fafc 0%, #edf2f7 100%);
+      border-radius: 16px;
+      border: 1px dashed var(--gray-300);
+      overflow-x: auto;
+    }
+
+    .person-node {
+      width: 150px;
+      background: var(--white);
+      border-radius: 16px;
+      border: 2px solid var(--gray-200);
+      padding: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      user-select: none;
+    }
+
+    .person-node.comparing {
+      border-color: var(--warning);
+      box-shadow: 0 0 0 4px var(--warning-light), var(--card-shadow-lg);
+      transform: translateY(-8px) scale(1.03);
+      z-index: 10;
+    }
+
+    .person-node.swapping {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px var(--primary-light), var(--card-shadow-lg);
+      transform: translateY(-12px) scale(1.05);
+      z-index: 20;
+    }
+
+    .person-node.sorted-done {
+      border-color: var(--success);
+      background: var(--success-light);
+    }
+
+    .person-index-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--dark);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      margin: 0.5rem 0 0.75rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .avatar-graphic {
+      width: 62px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      background: #f1f5f9;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+    }
+
+    .height-meter {
+      width: 100%;
+      background: #e2e8f0;
+      height: 6px;
+      border-radius: 3px;
+      margin: 6px 0;
+      overflow: hidden;
+    }
+
+    .height-meter-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--secondary), var(--primary));
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+
+    .person-name {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.4rem;
+      text-align: center;
+    }
+
+    .attr-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.75rem;
+    }
+
+    .attr-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 3px 6px;
+      border-radius: 6px;
+      background: var(--gray-100);
+      transition: all 0.3s ease;
+    }
+
+    .attr-row.focus-target {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+      border: 1px solid rgba(79, 70, 229, 0.2);
+    }
+
+    .attr-row.abstracted-out {
+      opacity: 0.12;
+      text-decoration: line-through;
+      filter: blur(1px);
+    }
+
+    .attr-label { color: var(--gray-600); }
+    .attr-row.focus-target .attr-label { color: var(--primary); }
+    .attr-val { font-weight: 600; }
+
+    /* ================= BOOKSHELF: MODULE 2 (LIBRARY SEARCH) ================= */
+    .bookshelf-arena {
+      background: linear-gradient(to bottom, #fdfbf7 0%, #fae8d4 100%);
+      border: 3px solid #b45309;
+      border-radius: 16px;
+      padding: 2.5rem 1rem 1rem 1rem;
+      position: relative;
+      box-shadow: inset 0 4px 10px rgba(0,0,0,0.06);
+    }
+
+    .shelf-label-sign {
+      position: absolute;
+      top: -14px;
+      left: 20px;
+      background: #78350f;
+      color: #fef3c7;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 8px;
+      letter-spacing: 0.05em;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .shelf-row {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 12px;
+      min-height: 240px;
+      border-bottom: 14px solid #78350f;
+      padding-bottom: 2px;
+      overflow-x: auto;
+    }
+
+    .book-spine {
+      width: 105px;
+      height: 210px;
+      border-radius: 8px 8px 2px 2px;
+      padding: 8px 6px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: white;
+      font-weight: 700;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: -3px 0 6px rgba(0,0,0,0.15), inset 4px 0 8px rgba(255,255,255,0.25);
+      user-select: none;
+    }
+
+    .book-spine:hover {
+      transform: translateY(-8px);
+    }
+
+    .book-spine.active-check {
+      transform: translateY(-16px) scale(1.06);
+      box-shadow: 0 0 0 4px #fbbf24, 0 12px 20px rgba(0,0,0,0.25);
+      z-index: 15;
+    }
+
+    .book-spine.found-match {
+      transform: translateY(-20px) scale(1.1);
+      box-shadow: 0 0 0 5px #10b981, 0 15px 25px rgba(16, 185, 129, 0.35);
+      z-index: 20;
+    }
+
+    .book-spine.eliminated {
+      opacity: 0.2;
+      filter: grayscale(80%);
+      transform: scale(0.92);
+    }
+
+    .book-callnum {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 3px 5px;
+      border-radius: 6px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.72rem;
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+
+    .book-title {
+      font-size: 0.78rem;
+      line-height: 1.25;
+      text-align: center;
+      margin: auto 0;
+      word-break: break-word;
+    }
+
+    .book-author {
+      font-size: 0.68rem;
+      text-align: center;
+      opacity: 0.9;
+      font-weight: 500;
+    }
+
+    .book-extra-info {
+      font-size: 0.62rem;
+      background: rgba(0,0,0,0.25);
+      border-radius: 4px;
+      padding: 2px;
+      margin-top: 3px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .book-extra-info.abstracted {
+      display: none;
+    }
+
+    /* Target Search Header HUD */
+    .search-target-hud {
+      background: #f8fafc;
+      border: 1.5px solid var(--gray-300);
+      border-radius: 14px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .target-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .target-badge {
+      background: #059669;
+      color: white;
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-family: 'Fira Code', monospace;
+    }
+
+    /* Interactive Layout Grid */
+    .interactive-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .interactive-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel-card {
+      background: var(--white);
+      border-radius: 18px;
+      border: 1px solid var(--gray-200);
+      padding: 1.25rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--dark);
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    /* Concept Badge */
+    .concept-tag {
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .tag-blue { background: #e0f2fe; color: #0284c7; }
+    .tag-purple { background: #ede9fe; color: #7c3aed; }
+    .tag-amber { background: #fef3c7; color: #d97706; }
+    .tag-emerald { background: #d1fae5; color: #059669; }
+
+    /* Code Terminal Display */
+    .terminal-box {
+      background: var(--dark);
+      color: #e2e8f0;
+      border-radius: 12px;
+      padding: 1rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      line-height: 1.6;
+      overflow-x: auto;
+    }
+
+    .code-line {
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: background 0.2s ease;
+    }
+
+    .code-line.active-line {
+      background: rgba(79, 70, 229, 0.45);
+      border-left: 3px solid #818cf8;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .code-line.active-line-green {
+      background: rgba(16, 185, 129, 0.45);
+      border-left: 3px solid #34d399;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .code-keyword { color: #f472b6; }
+    .code-fn { color: #60a5fa; }
+    .code-var { color: #34d399; }
+    .code-comment { color: #64748b; font-style: italic; }
+
+    /* Live Activity Step Boxes */
+    .step-task-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .step-task-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      border-radius: 12px;
+      background: var(--gray-100);
+      border: 1px solid var(--gray-200);
+      transition: all 0.2s ease;
+    }
+
+    .step-task-item.active {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .step-task-item.done {
+      background: var(--success-light);
+      border-color: var(--success);
+    }
+
+    .step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--gray-400);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .step-task-item.active .step-num { background: var(--primary); }
+    .step-task-item.done .step-num { background: var(--success); }
+
+    .step-text h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .step-text p {
+      font-size: 0.78rem;
+      color: var(--gray-600);
+      line-height: 1.4;
+    }
+
+    /* Checkbox Card */
+    .filter-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.65rem;
+      margin: 0.85rem 0;
+    }
+
+    .checkbox-card {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.65rem;
+      border-radius: 10px;
+      border: 1.5px solid var(--gray-200);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: var(--white);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .checkbox-card:hover { border-color: var(--primary); }
+    .checkbox-card.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .checkbox-card input { accent-color: var(--primary); }
+
+    /* Log Box */
+    .activity-log {
+      max-height: 180px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.8rem;
+      padding: 0.5rem;
+      background: var(--gray-100);
+      border-radius: 10px;
+      border: 1px solid var(--gray-200);
+    }
+
+    .log-entry {
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: var(--white);
+      border-left: 3px solid var(--primary);
+      color: var(--gray-800);
+    }
+
+    .log-entry.swap {
+      border-left-color: var(--warning);
+      background: #fffbeb;
+    }
+
+    .log-entry.eliminate {
+      border-left-color: var(--danger);
+      background: #fef2f2;
+    }
+
+    .log-entry.success {
+      border-left-color: var(--success);
+      background: #ecfdf5;
+      font-weight: 700;
+    }
+
+    /* Quiz Card */
+    .quiz-card {
+      background: var(--gray-100);
+      border-radius: 14px;
+      padding: 1rem;
+      margin-top: 0.75rem;
+      border: 1px solid var(--gray-200);
+    }
+
+    .quiz-question {
+      font-size: 0.86rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--dark);
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .quiz-opt-btn {
+      text-align: left;
+      padding: 0.55rem 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--gray-300);
+      background: var(--white);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .quiz-opt-btn:hover {
+      background: var(--gray-100);
+      border-color: var(--gray-400);
+    }
+
+    .quiz-opt-btn.correct {
+      background: var(--success-light);
+      border-color: var(--success);
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    .quiz-opt-btn.wrong {
+      background: #fef2f2;
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+
+    /* Status Alert */
+    .status-alert {
+      padding: 0.65rem 0.9rem;
+      border-radius: 10px;
+      margin-bottom: 0.85rem;
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+
+    .status-alert.info {
+      background: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #bae6fd;
+    }
+
+    .status-alert.success {
+      background: var(--success-light);
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--white);
+      border-top: 1px solid var(--gray-200);
+      padding: 1.25rem 2rem;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--gray-600);
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header>
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-icon">🧩</div>
+        <div>
+          <h1>Lab Berpikir Komputasional (CT Lab)</h1>
+          <p>Media Pembelajaran Interaktif 4 Pilar untuk Dosen & Mahasiswa</p>
+        </div>
+      </div>
+
+      <!-- Module / Topic Switcher -->
+      <div class="module-switcher">
+        <button class="module-btn active" id="mod-btn-sort" onclick="switchModule('sort')">
+          👥 Modul 1: Barisan Siswa (Sorting)
+        </button>
+        <button class="module-btn" id="mod-btn-library" onclick="switchModule('library')">
+          📚 Modul 2: Perpustakaan (Searching)
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- ========================================================================= -->
+    <!-- MODULE 1: BARISAN SISWA (SORTING)                                         -->
+    <!-- ========================================================================= -->
+    <div id="module-sort" class="module-view active">
+      <!-- 4 Pillars Navigation for Module 1 -->
+      <div class="nav-tabs-wrapper">
+        <nav class="nav-tabs">
+          <button class="tab-btn active" onclick="switchSortStage('abstraction')">
+            <span class="tab-badge">1</span> Abstraksi
+          </button>
+          <button class="tab-btn" onclick="switchSortStage('decomposition')">
+            <span class="tab-badge">2</span> Dekomposisi
+          </button>
+          <button class="tab-btn" onclick="switchSortStage('pattern')">
+            <span class="tab-badge">3</span> Pola
+          </button>
+          <button class="tab-btn" onclick="switchSortStage('algorithm')">
+            <span class="tab-badge">4</span> Algoritma
+          </button>
+        </nav>
+      </div>
+
+      <!-- Goal Mission Card -->
+      <div class="mission-card">
+        <div class="mission-text">
+          <h2>🎯 Studi Kasus 1: Mengurutkan Barisan Siswa</h2>
+          <p>Setiap siswa memiliki data: <strong>Nama</strong>, <strong>Tinggi Badan</strong>, <strong>Berat Badan</strong>, dan <strong>Jenis Kelamin</strong>.<br>Tugas kita adalah mengurutkan mereka dari yang <strong>paling pendek ke paling tinggi</strong>.</p>
+        </div>
+        <div class="mission-badges">
+          <div class="pill-tag" id="sort-pillar-badge">💡 Pilar 1: Abstraksi</div>
+        </div>
+      </div>
+
+      <!-- Live People Visualizer -->
+      <div class="visualizer-card">
+        <div class="arena-header">
+          <div class="arena-title">
+            <span>👥 Barisan Siswa Saat Ini</span>
+            <span id="sort-status-tag" class="concept-tag tag-amber" style="margin-left: 8px;">Belum Terurut</span>
+          </div>
+          <div class="arena-controls">
+            <button class="btn btn-secondary" onclick="randomizePeople()" title="Acak kembali data siswa">
+              🎲 Acak Barisan
+            </button>
+            <button class="btn btn-primary" id="btn-run-sort" onclick="startSorting()" style="display: none;">
+              ▶️ Jalankan Algoritma
+            </button>
+            <button class="btn btn-secondary" id="btn-step-sort" onclick="stepSorting()" style="display: none;">
+              ⏭️ Langkah Berikutnya
+            </button>
+            <button class="btn btn-danger" id="btn-reset-sort" onclick="resetSortState()" style="display: none;">
+              🔄 Reset
+            </button>
+          </div>
+        </div>
+
+        <div class="people-lineup" id="lineup-container"></div>
+      </div>
+
+      <!-- Module 1 - Stage 1: Abstraction -->
+      <section id="sort-stage-abstraction" class="stage-section active">
+        <div class="interactive-grid">
+          <div class="panel-card">
+            <div class="panel-header">
+              <span class="concept-tag tag-blue">Pilar 1</span>
+              <span>Abstraksi (Memilah Data Penting vs Tidak Penting)</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--gray-600); margin-bottom: 0.75rem; line-height: 1.5;">
+              <strong>Konsep Abstraksi:</strong> Menyaring informasi dan hanya mempertahankan data yang relevan dengan tujuan masalah, membuang detail yang tidak mempengaruhi hasil.
+            </p>
+            <div class="status-alert info">
+              🎯 <strong>Instruksi:</strong> Centang data yang <em>wajib digunakan</em> untuk mengurutkan barisan dari pendek ke tinggi!
+            </div>
+            <div class="filter-options">
+              <label class="checkbox-card selected" id="chk-card-height">
+                <input type="checkbox" id="chk-height" checked onchange="toggleSortAbstraction()">
+                <span>📏 Tinggi Badan (cm)</span>
+              </label>
+              <label class="checkbox-card" id="chk-card-weight">
+                <input type="checkbox" id="chk-weight" onchange="toggleSortAbstraction()">
+                <span>⚖️ Berat Badan (kg)</span>
+              </label>
+              <label class="checkbox-card" id="chk-card-gender">
+                <input type="checkbox" id="chk-gender" onchange="toggleSortAbstraction()">
+                <span>⚧️ Jenis Kelamin</span>
+              </label>
+              <label class="checkbox-card selected" id="chk-card-name">
+                <input type="checkbox" id="chk-name" checked onchange="toggleSortAbstraction()">
+                <span>🏷️ Nama Siswa</span>
+              </label>
+            </div>
+            <div style="display: flex; gap: 0.5rem; margin-top: 0.75rem;">
+              <button class="btn btn-primary" onclick="verifySortAbstraction()">
+                ✨ Terapkan Abstraksi
+              </button>
+              <button class="btn btn-secondary" onclick="switchSortStage('decomposition')">
+                Lanjut ke Dekomposisi &rarr;
+              </button>
+            </div>
+            <div id="sort-abstraction-feedback" style="margin-top: 0.75rem;"></div>
+          </div>
+
+          <div class="panel-card">
+            <div class="panel-header"><span>💡 Diskusi Kelas</span></div>
+            <div class="quiz-card">
+              <div class="quiz-question">
+                ❓ "Mengapa data <strong>Berat Badan</strong> dan <strong>Jenis Kelamin</strong> harus diabstraksi (diabaikan)?"
+              </div>
+              <div class="quiz-options">
+                <button class="quiz-opt-btn" onclick="checkQuiz(this, false)">A. Karena komputer tidak bisa membandingkan angka berat badan.</button>
+                <button class="quiz-opt-btn" onclick="checkQuiz(this, true)">B. Karena kriteria urutan hanya bergantung pada tinggi badan, data lain tidak mempengaruhi urutan.</button>
+                <button class="quiz-opt-btn" onclick="checkQuiz(this, false)">C. Agar tampilan kartu tidak terlalu penuh.</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Module 1 - Stage 2: Decomposition -->
+      <section id="sort-stage-decomposition" class="stage-section">
+        <div class="interactive-grid">
+          <div class="panel-card">
+            <div class="panel-header">
+              <span class="concept-tag tag-purple">Pilar 2</span>
+              <span>Dekomposisi (Memecah Masalah Kompleks)</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--gray-600); margin-bottom: 0.75rem; line-height: 1.5;">
+              <strong>Konsep Dekomposisi:</strong> Memecah pengurutan 5 orang sekaligus menjadi serangkaian sub-tugas kecil perbandingan 2 orang bersebelahan.
+            </p>
+            <div class="step-task-list">
+              <div class="step-task-item active">
+                <div class="step-num">A</div>
+                <div class="step-text">
+                  <h4>Sub-Tugas 1: Ambil 2 Orang Bersebelahan</h4>
+                  <p>Mulai dari index kiri: Siswa [i] dan Siswa [i+1].</p>
+                </div>
+              </div>
+              <div class="step-task-item">
+                <div class="step-num">B</div>
+                <div class="step-text">
+                  <h4>Sub-Tugas 2: Bandingkan Nilai Tinggi</h4>
+                  <p>Cek apakah orang kiri lebih tinggi dari orang kanan.</p>
+                </div>
+              </div>
+              <div class="step-task-item">
+                <div class="step-num">C</div>
+                <div class="step-text">
+                  <h4>Sub-Tugas 3: Tukar Tempat Jika Perlu</h4>
+                  <p>Jika Kiri &gt; Kanan &rarr; Tukar posisi. Jika tidak &rarr; Tetap.</p>
+                </div>
+              </div>
+              <div class="step-task-item">
+                <div class="step-num">D</div>
+                <div class="step-text">
+                  <h4>Sub-Tugas 4: Geser ke Pasangan Berikutnya</h4>
+                  <p>Lanjutkan ke pasangan berikutnya sampai ujung barisan.</p>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top: 1rem;">
+              <button class="btn btn-primary" onclick="switchSortStage('pattern')">Lanjut ke Pengenalan Pola &rarr;</button>
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <div class="panel-header"><span>🔬 Simulasi Pasangan Pertama</span></div>
+            <p style="font-size: 0.82rem; color: var(--gray-600); margin-bottom: 0.75rem;">
+              Sub-tugas perbandingan live pasangan index 0 & 1:
+            </p>
+            <div style="background: var(--gray-100); padding: 1rem; border-radius: 12px; border: 1px solid var(--gray-200);" id="decomp-mini-box"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Module 1 - Stage 3: Pattern Recognition -->
+      <section id="sort-stage-pattern" class="stage-section">
+        <div class="interactive-grid">
+          <div class="panel-card">
+            <div class="panel-header">
+              <span class="concept-tag tag-amber">Pilar 3</span>
+              <span>Pengenalan Pola (Pattern Recognition)</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--gray-600); margin-bottom: 0.75rem; line-height: 1.5;">
+              <strong>Konsep Pengenalan Pola:</strong> Menemukan keteraturan atau aturan logika yang berulang pada setiap pasangan.
+            </p>
+            <div class="status-alert info">
+              <strong>Aturan Pola (Kondisi IF):</strong><br>
+              🔍 <em>"Jika Tinggi(Kiri) &gt; Tinggi(Kanan) &rarr; TUKAR"</em><br>
+              🔍 <em>"Jika Tinggi(Kiri) &le; Tinggi(Kanan) &rarr; JANGAN TUKAR"</em>
+            </div>
+            <div class="quiz-card">
+              <div class="quiz-question">
+                🧠 <strong>Uji Pola:</strong> Jika Andi (165 cm) berada di kiri Budi (150 cm), apa aksi yang sesuai dengan pola kita?
+              </div>
+              <div class="quiz-options">
+                <button class="quiz-opt-btn" onclick="checkQuiz(this, true)">✅ Tukar posisi Andi dan Budi (karena 165 &gt; 150)</button>
+                <button class="quiz-opt-btn" onclick="checkQuiz(this, false)">❌ Tetap di tempat karena Andi lebih tinggi</button>
+                <button class="quiz-opt-btn" onclick="checkQuiz(this, false)">❌ Lewati tanpa mengecek</button>
+              </div>
+            </div>
+            <div style="margin-top: 1rem;">
+              <button class="btn btn-primary" onclick="switchSortStage('algorithm')">Lanjut ke Algoritma &rarr;</button>
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <div class="panel-header"><span>🔁 Pola Pengulangan (Looping Pass)</span></div>
+            <div style="font-size: 0.82rem; color: var(--gray-700); line-height: 1.6;">
+              <p>Pada Bubble Sort, kita mengenali pola perulangan:</p>
+              <ul style="margin: 0.5rem 0 0.5rem 1.25rem;">
+                <li><strong>Putaran 1:</strong> Orang tertinggi pasti sampai ke posisi paling kanan.</li>
+                <li><strong>Putaran 2:</strong> Orang tertinggi ke-2 berada di tempatnya.</li>
+                <li><strong>Selesai:</strong> Ketika tidak ada pertukaran lagi dalam 1 putaran.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Module 1 - Stage 4: Algorithm -->
+      <section id="sort-stage-algorithm" class="stage-section">
+        <div class="interactive-grid">
+          <div class="panel-card">
+            <div class="panel-header">
+              <span class="concept-tag tag-emerald">Pilar 4</span>
+              <span>Perancangan Algoritma (Bubble Sort)</span>
+            </div>
+            <div class="terminal-box">
+              <div class="code-line" id="sort-code-1"><span class="code-keyword">ULANGI</span> sampai terurut:</div>
+              <div class="code-line" id="sort-code-2">&nbsp;&nbsp;<span class="code-keyword">UNTUK SETIAP</span> pasangan i dan (i + 1):</div>
+              <div class="code-line" id="sort-code-3">&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">JIKA</span> <span class="code-var">tinggi[i]</span> &gt; <span class="code-var">tinggi[i + 1]</span> <span class="code-keyword">MAKA</span>:</div>
+              <div class="code-line" id="sort-code-4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-fn">TUKAR</span>(i, i + 1)</div>
+              <div class="code-line" id="sort-code-5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-var">ada_tukar</span> = <span class="code-keyword">BENAR</span></div>
+              <div class="code-line" id="sort-code-6">&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">JIKA TIDAK</span>: <span class="code-comment">// Biarkan</span></div>
+              <div class="code-line" id="sort-code-7"><span class="code-keyword">SELESAI</span>: Barisan sudah terurut!</div>
+            </div>
+            <div style="margin-top: 0.85rem;">
+              <label style="font-size: 0.78rem; font-weight: 600; color: var(--gray-600); display: block; margin-bottom: 4px;">Kecepatan Animasi:</label>
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <input type="range" id="sort-speed-slider" min="300" max="1500" value="800" step="100" style="flex: 1;">
+                <span id="sort-speed-label" style="font-size: 0.8rem; font-weight: 700; width: 65px;">0.8 detik</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <div class="panel-header"><span>📋 Live Execution Log</span></div>
+            <div class="activity-log" id="sort-execution-log">
+              <div class="log-entry">Klik "Jalankan Algoritma" atau "Langkah Berikutnya" di atas untuk simulasi.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+    <!-- ========================================================================= -->
+    <!-- MODULE 2: PERPUSTAKAAN KAMPUS (SEARCHING & BINARY SEARCH)                 -->
+    <!-- ========================================================================= -->
+    <div id="module-library" class="module-view">
+      <!-- 4 Pillars Navigation for Module 2 -->
+      <div class="nav-tabs-wrapper">
+        <nav class="nav-tabs">
+          <button class="tab-btn active" onclick="switchLibStage('abstraction')">
+            <span class="tab-badge">1</span> Abstraksi
+          </button>
+          <button class="tab-btn" onclick="switchLibStage('decomposition')">
+            <span class="tab-badge">2</span> Dekomposisi
+          </button>
+          <button class="tab-btn" onclick="switchLibStage('pattern')">
+            <span class="tab-badge">3</span> Pola
+          </button>
+          <button class="tab-btn" onclick="switchLibStage('algorithm')">
+            <span class="tab-badge">4</span> Algoritma
+          </button>
+        </nav>
+      </div>
+
+      <!-- Goal Mission Card -->
+      <div class="mission-card library-theme">
+        <div class="mission-text">
+          <h2>📚 Studi Kasus 2: Mencari Buku di Perpustakaan</h2>
+          <p>Anda diminta mencari buku <strong>"Dasar Pemrograman"</strong> (Kode: <code>005.1 BUD</code>) di antara 8 buku pada rak yang sudah tersusun rapi berdasarkan nomor klasifikasi.</p>
+        </div>
+        <div class="mission-badges">
+          <div class="pill-tag" id="lib-pillar-badge">💡 Pilar 1: Abstraksi</div>
+        </div>
+      </div>
+
+      <!-- Bookshelf Arena -->
+      <div class="visualizer-card">
+        <div class="arena-header">
+          <div class="target-info">
+            <span>🎯 Target Buku:</span>
+            <span class="target-badge" id="target-book-badge">005.1 - Dasar Pemrograman</span>
+          </div>
+          <div class="arena-controls">
+            <button class="btn btn-secondary" onclick="pickRandomBookTarget()">
+              🎯 Ganti Target Buku
+            </button>
+            <button class="btn btn-emerald" id="btn-run-binary" onclick="startBinarySearch()" style="display: none;">
+              ⚡ Binary Search (Bagi Dua)
+            </button>
+            <button class="btn btn-secondary" id="btn-run-linear" onclick="startLinearSearch()" style="display: none;">
+              🚶 Linear Search (Satu-Satu)
+            </button>
+            <button class="btn btn-danger" id="btn-reset-lib" onclick="resetLibState()" style="display: none;">
+              🔄 Reset Rak
+            </button>
+          </div>
+        </div>
+
+        <!-- The Bookshelf UI -->
+        <div class="bookshelf-arena">
+          <div class="shelf-label-sign">📖 RAK 000 - ILMU KOMPUTER & TEKNOLOGI</div>
+          <div class="shelf-row" id="bookshelf-container"></div>
+        </div>
+      </div>
+
+      <!-- Module 2 - Stage 1: Abstraction -->
+      <section id="lib-stage-abstraction" class="stage-section active">
+        <div class="interactive-grid">
+          <div class="panel-card">
+            <div class="panel-header">
+              <span class="concept-tag tag-blue">Pilar 1</span>
+              <span>Abstraksi (Informasi Relevan pada Buku)</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--gray-600); margin-bottom: 0.75rem; line-height: 1.5;">
+              <strong>Abstraksi pada Perpustakaan:</strong> Buku fisik memiliki banyak detail (warna sampul, tebal halaman, harga, penerbit). Untuk menemukan buku di rak dengan cepat, kita hanya perlu memusatkan perhatian pada <strong>Nomor Klasifikasi/Kode Panggil</strong> dan <strong>Judul</strong>.
+            </p>
+            <div class="status-alert info">
+              🎯 <strong>Coba Praktikkan:</strong> Hilangkan centang pada atribut yang tidak penting agar rak buku lebih mudah dicari!
+            </div>
+            <div class="filter-options">
+              <label class="checkbox-card selected" id="chk-card-lib-callnum">
+                <input type="checkbox" id="chk-lib-callnum" checked onchange="toggleLibAbstraction()">
+                <span>🏷️ Nomor Panggil (Kode Rak)</span>
+              </label>
+              <label class="checkbox-card selected" id="chk-card-lib-title">
+                <input type="checkbox" id="chk-lib-title" checked onchange="toggleLibAbstraction()">
+                <span>📖 Judul & Penulis</span>
+              </label>
+              <label class="checkbox-card" id="chk-card-lib-pages">
+                <input type="checkbox" id="chk-lib-pages" onchange="toggleLibAbstraction()">
+                <span>📄 Jumlah Halaman</span>
+              </label>
+              <label class="checkbox-card" id="chk-card-lib-price">
+                <input type="checkbox" id="chk-lib-price" onchange="toggleLibAbstraction()">
+                <span>💰 Harga Buku</span>
+              </label>
+            </div>
+            <div style="display: flex; gap: 0.5rem; margin-top: 0.75rem;">
+              <button class="btn btn-emerald" onclick="verifyLibAbstraction()">
+                ✨ Terapkan Abstraksi
+              </button>
+              <button class="btn btn-secondary" onclick="switchLibStage('decomposition')">
+                Lanjut ke Dekomposisi &rarr;
+              </button>
+            </div>
+            <div id="lib-abstraction-feedback" style="margin-top: 0.75rem;"></div>
+          </div>
+
+          <div class="panel-card">
+            <div class="panel-header"><span>💡 Diskusi Kelas</span></div>
+            <div class="quiz-card">
+              <div class="quiz-question">
+                ❓ "Mengapa perpustakaan modern menggunakan kode Dewey Decimal (contoh: <code>005.1</code>) bukan warna sampul?"
+              </div>
+              <div class="quiz-options">
+                <button class="quiz-opt-btn" onclick="checkQuiz(this, true)">A. Karena angka/kode panggil memiliki urutan terstruktur yang universal dan mudah dicari.</button>
+                <button class="quiz-opt-btn" onclick="checkQuiz(this, false)">B. Karena semua buku harus berwarna sama.</button>
+                <button class="quiz-opt-btn" onclick="checkQuiz(this, false)">C. Agar pengunjung perpustakaan bingung.</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Module 2 - Stage 2: Decomposition -->
+      <section id="lib-stage-decomposition" class="stage-section">
+        <div class="interactive-grid">
+          <div class="panel-card">
+            <div class="panel-header">
+              <span class="concept-tag tag-purple">Pilar 2</span>
+              <span>Dekomposisi (Memecah Alur Pencarian)</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--gray-600); margin-bottom: 0.75rem; line-height: 1.5;">
+              Mencari buku di gedung perpustakaan 3 lantai dipecah menjadi 4 level hierarki:
+            </p>
+            <div class="step-task-list">
+              <div class="step-task-item active">
+                <div class="step-num">1</div>
+                <div class="step-text">
+                  <h4>Level 1: Cek Katalog Komputer (OPAC)</h4>
+                  <p>Ketik judul buku &rarr; dapatkan kode panggil (<code>005.1 BUD d</code>).</p>
+                </div>
+              </div>
+              <div class="step-task-item">
+                <div class="step-num">2</div>
+                <div class="step-text">
+                  <h4>Level 2: Tentukan Lantai & Lorong</h4>
+                  <p>Kategori 000–099 &rarr; Lantai 2, Lorong A.</p>
+                </div>
+              </div>
+              <div class="step-task-item">
+                <div class="step-num">3</div>
+                <div class="step-text">
+                  <h4>Level 3: Temukan Rak 005</h4>
+                  <p>Berjalan ke rak berlabel 005 (Ilmu Komputer).</p>
+                </div>
+              </div>
+              <div class="step-task-item">
+                <div class="step-num">4</div>
+                <div class="step-text">
+                  <h4>Level 4: Temukan Buku Spesifik di Rak</h4>
+                  <p>Gunakan teknik pencarian (Binary/Linear) untuk mengambil buku.</p>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top: 1rem;">
+              <button class="btn btn-emerald" onclick="switchLibStage('pattern')">Lanjut ke Pengenalan Pola &rarr;</button>
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <div class="panel-header"><span>🗺️ Hierarki Dekomposisi</span></div>
+            <div style="background: var(--gray-100); padding: 1rem; border-radius: 12px; font-size: 0.82rem; line-height: 1.6;">
+              <strong>Piramida Pencarian:</strong><br>
+              🏢 Gedung Perpustakaan<br>
+              └── 📍 Lantai 2 (Kategori Sains & Tech)<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;└── 🗄️ Lorong A (Kode 000–099)<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── 📚 Rak 005.1<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── 📕 <strong>Buku: Dasar Pemrograman</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Module 2 - Stage 3: Pattern Recognition -->
+      <section id="lib-stage-pattern" class="stage-section">
+        <div class="interactive-grid">
+          <div class="panel-card">
+            <div class="panel-header">
+              <span class="concept-tag tag-amber">Pilar 3</span>
+              <span>Pengenalan Pola (Pola Terurut & Efisiensi)</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--gray-600); margin-bottom: 0.75rem; line-height: 1.5;">
+              <strong>Pola Kunci di Perpustakaan:</strong> Buku <em>selalu</em> disusun terurut dari nomor kecil ke besar (kiri ke kanan).
+            </p>
+            <div class="status-alert info">
+              💡 <strong>Pola Bagi Dua (Binary Elimination):</strong><br>
+              Jika kita buka buku di <strong>tengah rak</strong>, dan kodenya lebih besar dari target kita &rarr; <em>Kita bisa langsung mengeliminasi SELURUH buku di sebelah kanan tanpa perlu membukanya!</em>
+            </div>
+            <div class="quiz-card">
+              <div class="quiz-question">
+                🧠 <strong>Uji Pola:</strong> Jika kita mencari kode <code>004.2</code> dan buku tengah berkode <code>005.8</code>, separuh rak mana yang langsung bisa diabaikan?
+              </div>
+              <div class="quiz-options">
+                <button class="quiz-opt-btn" onclick="checkQuiz(this, true)">✅ Separuh KANAN (karena semua buku di kanan pasti &gt; 005.8)</button>
+                <button class="quiz-opt-btn" onclick="checkQuiz(this, false)">❌ Separuh KIRI</button>
+                <button class="quiz-opt-btn" onclick="checkQuiz(this, false)">❌ Tidak ada yang bisa diabaikan</button>
+              </div>
+            </div>
+            <div style="margin-top: 1rem;">
+              <button class="btn btn-emerald" onclick="switchLibStage('algorithm')">Lanjut ke Algoritma &rarr;</button>
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <div class="panel-header"><span>⚖️ Perbandingan 2 Pola Pencarian</span></div>
+            <div style="font-size: 0.82rem; color: var(--gray-700); line-height: 1.6;">
+              <p><strong>1. Linear Search (Cek 1 per 1 dari kiri):</strong></p>
+              <p style="color: var(--gray-600);">Lambat pada rak berisi 1.000 buku (bisa butuh 1.000 kali cek).</p>
+              <br>
+              <p><strong>2. Binary Search (Buka di tengah & bagi dua):</strong></p>
+              <p style="color: var(--gray-600);">Sangat cepat! Untuk 1.000 buku, maksimal hanya butuh <strong>10 kali cek</strong> ($\log_2 1000 \approx 10$).</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Module 2 - Stage 4: Algorithm -->
+      <section id="lib-stage-algorithm" class="stage-section">
+        <div class="interactive-grid">
+          <div class="panel-card">
+            <div class="panel-header">
+              <span class="concept-tag tag-emerald">Pilar 4</span>
+              <span>Perancangan Algoritma (Binary Search)</span>
+            </div>
+            <div class="terminal-box">
+              <div class="code-line" id="lib-code-1"><span class="code-var">low</span> = 0, <span class="code-var">high</span> = jumlah_buku - 1</div>
+              <div class="code-line" id="lib-code-2"><span class="code-keyword">SELAMA</span> <span class="code-var">low</span> &le; <span class="code-var">high</span>:</div>
+              <div class="code-line" id="lib-code-3">&nbsp;&nbsp;<span class="code-var">mid</span> = <span class="code-fn">FLOOR</span>((low + high) / 2)</div>
+              <div class="code-line" id="lib-code-4">&nbsp;&nbsp;<span class="code-keyword">JIKA</span> <span class="code-var">buku[mid]</span> == <span class="code-var">target</span> &rarr; <span class="code-fn">KETEMU!</span></div>
+              <div class="code-line" id="lib-code-5">&nbsp;&nbsp;<span class="code-keyword">JIKA</span> <span class="code-var">buku[mid]</span> &lt; <span class="code-var">target</span>: <span class="code-var">low</span> = mid + 1</div>
+              <div class="code-line" id="lib-code-6">&nbsp;&nbsp;<span class="code-keyword">JIKA</span> <span class="code-var">buku[mid]</span> &gt; <span class="code-var">target</span>: <span class="code-var">high</span> = mid - 1</div>
+            </div>
+            <div style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button class="btn btn-emerald" onclick="startBinarySearch()">
+                ⚡ Coba Binary Search (Cepat)
+              </button>
+              <button class="btn btn-secondary" onclick="startLinearSearch()">
+                🚶 Coba Linear Search (Satu-Satu)
+              </button>
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <div class="panel-header"><span>📋 Log Pelacakan Rak</span></div>
+            <div class="activity-log" id="lib-execution-log">
+              <div class="log-entry">Pilih metode pencarian di atas untuk melihat algoritma bekerja.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>💡 <strong>Lab Berpikir Komputasional</strong> • Media Interaktif Pengenalan 4 Pilar CT untuk Mahasiswa</p>
+  </footer>
+
+  <script>
+    // =========================================================================
+    // GLOBAL SOUND ENGINE (Web Audio API)
+    // =========================================================================
+    const audioCtx = (typeof AudioContext !== 'undefined' || typeof webkitAudioContext !== 'undefined')
+      ? new (window.AudioContext || window.webkitAudioContext)()
+      : null;
+
+    function playBeep(freq = 440, type = 'sine', duration = 0.08) {
+      if (!audioCtx) return;
+      try {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    // =========================================================================
+    // MODULE SWITCHER LOGIC
+    // =========================================================================
+    let currentModule = 'sort';
+
+    function switchModule(moduleName) {
+      currentModule = moduleName;
+      document.querySelectorAll('.module-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.module-view').forEach(view => view.classList.remove('active'));
+
+      if (moduleName === 'sort') {
+        document.getElementById('mod-btn-sort').classList.add('active');
+        document.getElementById('module-sort').classList.add('active');
+        switchSortStage(activeSortStage);
+      } else {
+        document.getElementById('mod-btn-library').classList.add('active');
+        document.getElementById('module-library').classList.add('active');
+        switchLibStage(activeLibStage);
+      }
+      playBeep(520, 'triangle', 0.05);
+    }
+
+    // =========================================================================
+    // MODULE 1: BARISAN SISWA (SORTING LOGIC)
+    // =========================================================================
+    const initialStudents = [
+      { name: "Andi", height: 165, weight: 55, gender: "Laki-laki", avatar: "👦" },
+      { name: "Budi", height: 150, weight: 45, gender: "Laki-laki", avatar: "🧑" },
+      { name: "Citra", height: 158, weight: 50, gender: "Perempuan", avatar: "👧" },
+      { name: "Dewi", height: 170, weight: 60, gender: "Perempuan", avatar: "👩" },
+      { name: "Eko", height: 155, weight: 52, gender: "Laki-laki", avatar: "👦" }
+    ];
+
+    let students = JSON.parse(JSON.stringify(initialStudents));
+    let showHeight = true, showWeight = false, showGender = false, showName = true;
+    let isSorting = false, sortInterval = null;
+    let outerIdx = 0, innerIdx = 0, hasSwapped = false, isSortDone = false;
+    let activeSortStage = 'abstraction';
+
+    function renderLineup(comparingIndices = [], swappingIndices = []) {
+      const container = document.getElementById('lineup-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      students.forEach((person, index) => {
+        const isComparing = comparingIndices.includes(index);
+        const isSwapping = swappingIndices.includes(index);
+
+        const card = document.createElement('div');
+        card.className = `person-node ${isComparing ? 'comparing' : ''} ${isSwapping ? 'swapping' : ''} ${isSortDone ? 'sorted-done' : ''}`;
+        
+        const heightPercent = Math.min(100, Math.max(20, ((person.height - 140) / 40) * 100));
+
+        card.innerHTML = `
+          <div class="person-index-badge">Posisi #${index + 1}</div>
+          <div class="avatar-wrapper">
+            <div class="avatar-graphic">${person.avatar}</div>
+          </div>
+          <div class="person-name" style="${!showName ? 'opacity: 0.2;' : ''}">${person.name}</div>
+          <div class="height-meter">
+            <div class="height-meter-fill" style="width: ${heightPercent}%;"></div>
+          </div>
+          <div class="attr-list">
+            <div class="attr-row focus-target ${!showHeight ? 'abstracted-out' : ''}">
+              <span class="attr-label">Tinggi:</span>
+              <span class="attr-val">${person.height} cm</span>
+            </div>
+            <div class="attr-row ${!showWeight ? 'abstracted-out' : ''}">
+              <span class="attr-label">Berat:</span>
+              <span class="attr-val">${person.weight} kg</span>
+            </div>
+            <div class="attr-row ${!showGender ? 'abstracted-out' : ''}">
+              <span class="attr-label">Kelamin:</span>
+              <span class="attr-val">${person.gender}</span>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      checkSortStatus();
+      updateDecompBox();
+    }
+
+    function checkSortStatus() {
+      let sorted = true;
+      for (let i = 0; i < students.length - 1; i++) {
+        if (students[i].height > students[i + 1].height) {
+          sorted = false;
+          break;
+        }
+      }
+      const tag = document.getElementById('sort-status-tag');
+      if (sorted) {
+        tag.className = "concept-tag tag-emerald";
+        tag.innerText = "✅ Terurut Sempurna!";
+      } else {
+        tag.className = "concept-tag tag-amber";
+        tag.innerText = "⏳ Belum Terurut";
+      }
+    }
+
+    function switchSortStage(stageName) {
+      activeSortStage = stageName;
+      const navTabs = document.querySelector('#module-sort .nav-tabs');
+      const tabs = navTabs.querySelectorAll('.tab-btn');
+      const names = ['abstraction', 'decomposition', 'pattern', 'algorithm'];
+      tabs.forEach((tab, i) => {
+        if (names[i] === stageName) tab.classList.add('active');
+        else tab.classList.remove('active');
+      });
+
+      document.querySelectorAll('#module-sort .stage-section').forEach(sec => sec.classList.remove('active'));
+      const targetSec = document.getElementById(`sort-stage-${stageName}`);
+      if (targetSec) targetSec.classList.add('active');
+
+      const badge = document.getElementById('sort-pillar-badge');
+      const btnRun = document.getElementById('btn-run-sort');
+      const btnStep = document.getElementById('btn-step-sort');
+      const btnReset = document.getElementById('btn-reset-sort');
+
+      if (stageName === 'abstraction') {
+        badge.innerText = "💡 Pilar 1: Abstraksi";
+        btnRun.style.display = 'none'; btnStep.style.display = 'none'; btnReset.style.display = 'none';
+      } else if (stageName === 'decomposition') {
+        badge.innerText = "🧩 Pilar 2: Dekomposisi";
+        btnRun.style.display = 'none'; btnStep.style.display = 'inline-flex'; btnReset.style.display = 'none';
+      } else if (stageName === 'pattern') {
+        badge.innerText = "🔍 Pilar 3: Pengenalan Pola";
+        btnRun.style.display = 'none'; btnStep.style.display = 'inline-flex'; btnReset.style.display = 'none';
+      } else if (stageName === 'algorithm') {
+        badge.innerText = "⚙️ Pilar 4: Berpikir Algoritma";
+        btnRun.style.display = 'inline-flex'; btnStep.style.display = 'inline-flex'; btnReset.style.display = 'inline-flex';
+      }
+      playBeep(520, 'triangle', 0.05);
+    }
+
+    function toggleSortAbstraction() {
+      showHeight = document.getElementById('chk-height').checked;
+      showWeight = document.getElementById('chk-weight').checked;
+      showGender = document.getElementById('chk-gender').checked;
+      showName = document.getElementById('chk-name').checked;
+
+      ['height', 'weight', 'gender', 'name'].forEach(id => {
+        const chk = document.getElementById(`chk-${id}`);
+        const card = document.getElementById(`chk-card-${id}`);
+        if (chk.checked) card.classList.add('selected');
+        else card.classList.remove('selected');
+      });
+      renderLineup();
+    }
+
+    function verifySortAbstraction() {
+      const isHeightOnly = showHeight && !showWeight && !showGender;
+      const feedback = document.getElementById('sort-abstraction-feedback');
+      if (isHeightOnly) {
+        feedback.innerHTML = `<div class="status-alert success">🎉 <strong>Tepat sekali!</strong> Data Berat Badan & Jenis Kelamin telah berhasil diabstraksi (diabaikan)!</div>`;
+        playBeep(660, 'sine', 0.15);
+      } else if (!showHeight) {
+        feedback.innerHTML = `<div class="status-alert" style="background:#fee2e2; color:#b91c1c;">⚠️ Tinggi Badan wajib dipilih untuk mengurutkan tinggi badan.</div>`;
+        playBeep(220, 'sawtooth', 0.15);
+      } else {
+        feedback.innerHTML = `<div class="status-alert info">💡 Coba hilangkan centang pada Berat Badan & Jenis Kelamin agar data lebih sederhana.</div>`;
+        playBeep(330, 'triangle', 0.1);
+      }
+    }
+
+    function updateDecompBox() {
+      const box = document.getElementById('decomp-mini-box');
+      if (!box || students.length < 2) return;
+      const p1 = students[0], p2 = students[1];
+      const needSwap = p1.height > p2.height;
+      box.innerHTML = `
+        <div style="display:flex; justify-content:space-around; align-items:center; margin-bottom: 0.5rem;">
+          <div style="text-align:center;">
+            <div style="font-size:1.6rem;">${p1.avatar}</div>
+            <strong>${p1.name}</strong><br><span style="color:var(--primary); font-weight:700;">${p1.height} cm</span>
+          </div>
+          <div style="font-size: 1.3rem; font-weight:800; color:var(--gray-400);">VS</div>
+          <div style="text-align:center;">
+            <div style="font-size:1.6rem;">${p2.avatar}</div>
+            <strong>${p2.name}</strong><br><span style="color:var(--primary); font-weight:700;">${p2.height} cm</span>
+          </div>
+        </div>
+        <div style="font-size:0.8rem; text-align:center; color:var(--gray-700); background:white; padding:6px; border-radius:6px;">
+          ${needSwap 
+            ? `⚡ <strong>${p1.name} (${p1.height}cm) &gt; ${p2.name} (${p2.height}cm)</strong> &rarr; <strong>Wajib Tukar Posisi</strong>.`
+            : `✅ <strong>${p1.name} (${p1.height}cm) &le; ${p2.name} (${p2.height}cm)</strong> &rarr; <strong>Sudah benar, tidak perlu tukar</strong>.`
+          }
+        </div>
+      `;
+    }
+
+    function highlightSortCode(lineNum) {
+      for (let i = 1; i <= 7; i++) {
+        const el = document.getElementById(`sort-code-${i}`);
+        if (el) el.classList.remove('active-line');
+      }
+      const activeEl = document.getElementById(`sort-code-${lineNum}`);
+      if (activeEl) activeEl.classList.add('active-line');
+    }
+
+    function addSortLog(message, type = 'normal') {
+      const log = document.getElementById('sort-execution-log');
+      if (!log) return;
+      const entry = document.createElement('div');
+      entry.className = `log-entry ${type}`;
+      entry.innerHTML = message;
+      log.prepend(entry);
+    }
+
+    function stepSorting() {
+      if (isSortDone) {
+        addSortLog("🎉 Barisan sudah terurut dari pendek ke tinggi!", "success");
+        highlightSortCode(7);
+        return;
+      }
+      const n = students.length;
+      highlightSortCode(2);
+      const p1 = students[innerIdx], p2 = students[innerIdx + 1];
+      highlightSortCode(3);
+      playBeep(440, 'sine', 0.06);
+
+      if (p1.height > p2.height) {
+        highlightSortCode(4);
+        renderLineup([innerIdx, innerIdx + 1], [innerIdx, innerIdx + 1]);
+        addSortLog(`🔄 <strong>Tukar:</strong> ${p1.name} (${p1.height}cm) &gt; ${p2.name} (${p2.height}cm)`, "swap");
+        playBeep(320, 'square', 0.08);
+
+        students[innerIdx] = p2;
+        students[innerIdx + 1] = p1;
+        hasSwapped = true;
+
+        setTimeout(() => renderLineup([innerIdx, innerIdx + 1]), 250);
+      } else {
+        highlightSortCode(6);
+        renderLineup([innerIdx, innerIdx + 1]);
+        addSortLog(`✔️ <strong>Tetap:</strong> ${p1.name} (${p1.height}cm) &le; ${p2.name} (${p2.height}cm)`);
+      }
+
+      innerIdx++;
+      if (innerIdx >= n - 1 - outerIdx) {
+        innerIdx = 0;
+        outerIdx++;
+        if (!hasSwapped || outerIdx >= n - 1) {
+          isSortDone = true;
+          highlightSortCode(7);
+          renderLineup();
+          addSortLog("🏁 <strong>Algoritma Selesai!</strong>", "success");
+          playBeep(784, 'sine', 0.3);
+          stopAutoSort();
+        }
+        hasSwapped = false;
+      }
+    }
+
+    function startSorting() {
+      if (isSorting) { stopAutoSort(); return; }
+      const btn = document.getElementById('btn-run-sort');
+      btn.innerText = "⏸️ Jeda Algoritma";
+      btn.className = "btn btn-danger";
+      isSorting = true;
+      const speed = parseInt(document.getElementById('sort-speed-slider').value, 10) || 800;
+      sortInterval = setInterval(() => {
+        if (isSortDone) stopAutoSort();
+        else stepSorting();
+      }, speed);
+    }
+
+    function stopAutoSort() {
+      if (sortInterval) clearInterval(sortInterval);
+      sortInterval = null;
+      isSorting = false;
+      const btn = document.getElementById('btn-run-sort');
+      if (btn) {
+        btn.innerText = "▶️ Jalankan Algoritma";
+        btn.className = "btn btn-primary";
+      }
+    }
+
+    function resetSortState() {
+      stopAutoSort();
+      outerIdx = 0; innerIdx = 0; hasSwapped = false; isSortDone = false;
+      highlightSortCode(1);
+      renderLineup();
+      addSortLog("🔄 Status algoritma di-reset.");
+    }
+
+    function randomizePeople() {
+      stopAutoSort();
+      const names = ["Andi", "Budi", "Citra", "Dewi", "Eko", "Fajar", "Gita", "Hadi"];
+      const avatars = ["👦", "🧑", "👧", "👩", "🧒", "👱‍♂️", "👱‍♀️", "🧕"];
+      const genders = ["Laki-laki", "Perempuan"];
+      students = [];
+      const count = 5;
+      const usedNames = [...names].sort(() => 0.5 - Math.random()).slice(0, count);
+
+      for (let i = 0; i < count; i++) {
+        const height = Math.floor(Math.random() * 26) + 148;
+        const weight = Math.floor(Math.random() * 20) + 45;
+        const gender = genders[Math.floor(Math.random() * genders.length)];
+        const avatar = gender === "Perempuan" ? avatars[Math.floor(Math.random() * 2) + 2] : avatars[Math.floor(Math.random() * 2)];
+        students.push({ name: usedNames[i], height, weight, gender, avatar });
+      }
+      resetSortState();
+      playBeep(480, 'triangle', 0.1);
+    }
+
+    document.getElementById('sort-speed-slider').addEventListener('input', function(e) {
+      const val = e.target.value;
+      document.getElementById('sort-speed-label').innerText = `${(val / 1000).toFixed(1)} detik`;
+      if (isSorting) { stopAutoSort(); startSorting(); }
+    });
+
+
+    // =========================================================================
+    // MODULE 2: PERPUSTAKAAN KAMPUS (SEARCHING LOGIC)
+    // =========================================================================
+    const libraryBooks = [
+      { callNum: "004.1", title: "Arsitektur Komputer", author: "Tanenbaum", pages: 420, price: 120000, color: "#1e3a8a" },
+      { callNum: "005.1", title: "Dasar Pemrograman", author: "Budi S.", pages: 310, price: 85000, color: "#065f46" },
+      { callNum: "005.4", title: "Sistem Operasi", author: "Silberschatz", pages: 550, price: 150000, color: "#7c2d12" },
+      { callNum: "005.7", title: "Struktur Data & Algoritma", author: "Kurniawan", pages: 380, price: 95000, color: "#581c87" },
+      { callNum: "006.3", title: "Kecerdasan Buatan (AI)", author: "Russell & N.", pages: 620, price: 175000, color: "#831843" },
+      { callNum: "007.2", title: "Jaringan Komputer", author: "Forouzan", pages: 490, price: 135000, color: "#134e4a" },
+      { callNum: "008.5", title: "Keamanan Siber", author: "Stallings", pages: 410, price: 110000, color: "#312e81" },
+      { callNum: "009.1", title: "Cloud & Distributed System", author: "Coulouris", pages: 500, price: 140000, color: "#374151" }
+    ];
+
+    let targetBook = libraryBooks[1]; // Default: Dasar Pemrograman (005.1)
+    let showLibPages = false, showLibPrice = false;
+    let activeLibStage = 'abstraction';
+    let libSearching = false;
+
+    function renderBookshelf(activeIdx = null, eliminatedIndices = [], foundIdx = null) {
+      const container = document.getElementById('bookshelf-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      libraryBooks.forEach((book, index) => {
+        const isActive = index === activeIdx;
+        const isEliminated = eliminatedIndices.includes(index);
+        const isFound = index === foundIdx;
+
+        const bookEl = document.createElement('div');
+        bookEl.className = `book-spine ${isActive ? 'active-check' : ''} ${isEliminated ? 'eliminated' : ''} ${isFound ? 'found-match' : ''}`;
+        bookEl.style.backgroundColor = book.color;
+
+        bookEl.innerHTML = `
+          <div class="book-callnum">${book.callNum}</div>
+          <div class="book-title">${book.title}</div>
+          <div class="book-author">${book.author}</div>
+          <div class="book-extra-info ${!showLibPages ? 'abstracted' : ''}">📄 ${book.pages} hlm</div>
+          <div class="book-extra-info ${!showLibPrice ? 'abstracted' : ''}">💰 Rp ${book.price.toLocaleString()}</div>
+        `;
+
+        bookEl.onclick = () => {
+          if (!libSearching) {
+            targetBook = book;
+            updateTargetHUD();
+            resetLibState();
+            playBeep(560, 'sine', 0.1);
+          }
+        };
+
+        container.appendChild(bookEl);
+      });
+    }
+
+    function updateTargetHUD() {
+      document.getElementById('target-book-badge').innerText = `${targetBook.callNum} - ${targetBook.title}`;
+    }
+
+    function pickRandomBookTarget() {
+      const rand = libraryBooks[Math.floor(Math.random() * libraryBooks.length)];
+      targetBook = rand;
+      updateTargetHUD();
+      resetLibState();
+      addLibLog(`🎯 Target pencarian diubah ke: <strong>${targetBook.callNum} - ${targetBook.title}</strong>`);
+      playBeep(640, 'triangle', 0.1);
+    }
+
+    function switchLibStage(stageName) {
+      activeLibStage = stageName;
+      const navTabs = document.querySelector('#module-library .nav-tabs');
+      const tabs = navTabs.querySelectorAll('.tab-btn');
+      const names = ['abstraction', 'decomposition', 'pattern', 'algorithm'];
+      tabs.forEach((tab, i) => {
+        if (names[i] === stageName) tab.classList.add('active');
+        else tab.classList.remove('active');
+      });
+
+      document.querySelectorAll('#module-library .stage-section').forEach(sec => sec.classList.remove('active'));
+      const targetSec = document.getElementById(`lib-stage-${stageName}`);
+      if (targetSec) targetSec.classList.add('active');
+
+      const badge = document.getElementById('lib-pillar-badge');
+      const btnBin = document.getElementById('btn-run-binary');
+      const btnLin = document.getElementById('btn-run-linear');
+      const btnReset = document.getElementById('btn-reset-lib');
+
+      if (stageName === 'abstraction') {
+        badge.innerText = "💡 Pilar 1: Abstraksi";
+        btnBin.style.display = 'none'; btnLin.style.display = 'none'; btnReset.style.display = 'none';
+      } else if (stageName === 'decomposition') {
+        badge.innerText = "🧩 Pilar 2: Dekomposisi";
+        btnBin.style.display = 'none'; btnLin.style.display = 'none'; btnReset.style.display = 'none';
+      } else if (stageName === 'pattern') {
+        badge.innerText = "🔍 Pilar 3: Pengenalan Pola";
+        btnBin.style.display = 'inline-flex'; btnLin.style.display = 'inline-flex'; btnReset.style.display = 'inline-flex';
+      } else if (stageName === 'algorithm') {
+        badge.innerText = "⚙️ Pilar 4: Berpikir Algoritma";
+        btnBin.style.display = 'inline-flex'; btnLin.style.display = 'inline-flex'; btnReset.style.display = 'inline-flex';
+      }
+      playBeep(520, 'triangle', 0.05);
+    }
+
+    function toggleLibAbstraction() {
+      showLibPages = document.getElementById('chk-lib-pages').checked;
+      showLibPrice = document.getElementById('chk-lib-price').checked;
+
+      ['pages', 'price'].forEach(id => {
+        const chk = document.getElementById(`chk-lib-${id}`);
+        const card = document.getElementById(`chk-card-lib-${id}`);
+        if (chk.checked) card.classList.add('selected');
+        else card.classList.remove('selected');
+      });
+      renderBookshelf();
+    }
+
+    function verifyLibAbstraction() {
+      const feedback = document.getElementById('lib-abstraction-feedback');
+      if (!showLibPages && !showLibPrice) {
+        feedback.innerHTML = `<div class="status-alert success">🎉 <strong>Hebat!</strong> Kita hanya fokus pada <strong>Nomor Panggil (Kode Rak)</strong> dan Judul. Data tebal & harga berhasil diabstraksi!</div>`;
+        playBeep(660, 'sine', 0.15);
+      } else {
+        feedback.innerHTML = `<div class="status-alert info">💡 Hilangkan centang pada Jumlah Halaman & Harga Buku agar rak tidak penuh detail yang tidak perlu.</div>`;
+        playBeep(330, 'triangle', 0.1);
+      }
+    }
+
+    function highlightLibCode(lineNum) {
+      for (let i = 1; i <= 6; i++) {
+        const el = document.getElementById(`lib-code-${i}`);
+        if (el) el.classList.remove('active-line-green');
+      }
+      const activeEl = document.getElementById(`lib-code-${lineNum}`);
+      if (activeEl) activeEl.classList.add('active-line-green');
+    }
+
+    function addLibLog(message, type = 'normal') {
+      const log = document.getElementById('lib-execution-log');
+      if (!log) return;
+      const entry = document.createElement('div');
+      entry.className = `log-entry ${type}`;
+      entry.innerHTML = message;
+      log.prepend(entry);
+    }
+
+    function resetLibState() {
+      libSearching = false;
+      highlightLibCode(1);
+      renderBookshelf();
+      addLibLog("🔄 Rak buku di-reset.");
+    }
+
+    // Binary Search Animation Runner
+    async function startBinarySearch() {
+      if (libSearching) return;
+      libSearching = true;
+      resetLibState();
+
+      addLibLog(`⚡ <strong>Mulai Binary Search</strong> untuk target: <code>${targetBook.callNum}</code>`);
+      let low = 0;
+      let high = libraryBooks.length - 1;
+      let eliminated = [];
+      let stepCount = 0;
+
+      highlightLibCode(1);
+      await new Promise(r => setTimeout(r, 600));
+
+      while (low <= high) {
+        stepCount++;
+        highlightLibCode(2);
+        const mid = Math.floor((low + high) / 2);
+        const currentBook = libraryBooks[mid];
+
+        highlightLibCode(3);
+        renderBookshelf(mid, eliminated);
+        addLibLog(`📍 <strong>Langkah #${stepCount}:</strong> Cek titik tengah (Index ${mid}) &rarr; <code>${currentBook.callNum} - ${currentBook.title}</code>`);
+        playBeep(480, 'sine', 0.1);
+        await new Promise(r => setTimeout(r, 1000));
+
+        if (currentBook.callNum === targetBook.callNum) {
+          highlightLibCode(4);
+          renderBookshelf(null, eliminated, mid);
+          addLibLog(`🎉 <strong>KETEMU!</strong> Buku <code>${targetBook.callNum}</code> ditemukan hanya dalam <strong>${stepCount} langkah</strong>!`, "success");
+          playBeep(880, 'sine', 0.35);
+          libSearching = false;
+          return;
+        }
+
+        if (currentBook.callNum < targetBook.callNum) {
+          highlightLibCode(5);
+          addLibLog(`➡️ <code>${currentBook.callNum}</code> &lt; target <code>${targetBook.callNum}</code> &rarr; Eliminasi separuh KIRI (Index ${low} s/d ${mid})`, "eliminate");
+          for (let i = low; i <= mid; i++) {
+            if (!eliminated.includes(i)) eliminated.push(i);
+          }
+          low = mid + 1;
+        } else {
+          highlightLibCode(6);
+          addLibLog(`⬅️ <code>${currentBook.callNum}</code> &gt; target <code>${targetBook.callNum}</code> &rarr; Eliminasi separuh KANAN (Index ${mid} s/d ${high})`, "eliminate");
+          for (let i = mid; i <= high; i++) {
+            if (!eliminated.includes(i)) eliminated.push(i);
+          }
+          high = mid - 1;
+        }
+
+        renderBookshelf(null, eliminated);
+        playBeep(300, 'sawtooth', 0.1);
+        await new Promise(r => setTimeout(r, 900));
+      }
+
+      libSearching = false;
+    }
+
+    // Linear Search Animation Runner
+    async function startLinearSearch() {
+      if (libSearching) return;
+      libSearching = true;
+      resetLibState();
+
+      addLibLog(`🚶 <strong>Mulai Linear Search</strong> (Cek satu per satu dari kiri)`);
+      let eliminated = [];
+
+      for (let i = 0; i < libraryBooks.length; i++) {
+        const currentBook = libraryBooks[i];
+        renderBookshelf(i, eliminated);
+        addLibLog(`🔍 Cek Buku #${i + 1}: <code>${currentBook.callNum}</code>`);
+        playBeep(400, 'triangle', 0.08);
+        await new Promise(r => setTimeout(r, 650));
+
+        if (currentBook.callNum === targetBook.callNum) {
+          renderBookshelf(null, eliminated, i);
+          addLibLog(`🎉 <strong>KETEMU!</strong> Buku ditemukan setelah <strong>${i + 1} kali periksa</strong>.`, "success");
+          playBeep(880, 'sine', 0.35);
+          libSearching = false;
+          return;
+        } else {
+          eliminated.push(i);
+        }
+      }
+      libSearching = false;
+    }
+
+    // Generic Quiz Checker
+    function checkQuiz(btn, isCorrect) {
+      const parent = btn.parentElement;
+      const buttons = parent.querySelectorAll('.quiz-opt-btn');
+      buttons.forEach(b => {
+        b.classList.remove('correct', 'wrong');
+        b.disabled = true;
+      });
+
+      if (isCorrect) {
+        btn.classList.add('correct');
+        playBeep(600, 'sine', 0.15);
+      } else {
+        btn.classList.add('wrong');
+        playBeep(220, 'sawtooth', 0.2);
+      }
+    }
+
+    // Initialize View on Page Load
+    window.addEventListener('DOMContentLoaded', () => {
+      // Init Module 1
+      document.getElementById('chk-height').checked = true;
+      document.getElementById('chk-weight').checked = false;
+      document.getElementById('chk-gender').checked = false;
+      document.getElementById('chk-name').checked = true;
+      toggleSortAbstraction();
+
+      // Init Module 2
+      document.getElementById('chk-lib-callnum').checked = true;
+      document.getElementById('chk-lib-title').checked = true;
+      document.getElementById('chk-lib-pages').checked = false;
+      document.getElementById('chk-lib-price').checked = false;
+      updateTargetHUD();
+      renderBookshelf();
+    });
+  </script>
+</body>
+</html>
